@@ -22,16 +22,16 @@
     gap: 20px;
   }
 
+  h3 {
+    .icon {
+      position: relative;
+      top: 4px;
+    }
+  }
+
   a {
     border: 1px solid $primary;
     padding: 20px 40px;
     border-radius: 10px;
-    transition: all 0.5s ease-in-out;
-
-    &:hover,
-    &:focus {
-      text-shadow: $primary 0 0 10px;
-      box-shadow: 0 0 10px 5px $primary;
-    }
   }
 }

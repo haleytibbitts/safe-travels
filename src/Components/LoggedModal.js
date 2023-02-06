@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import {BiWorld, BiBookHeart, BiPaperPlane} from 'react-icons/bi';
+import { BiWorld, BiBookHeart } from "react-icons/bi";
+import { SlPlane } from "react-icons/sl";
 
 const LoggedModal = ({ openModal, setOpenModal, allValues }) => {
   return (
@@ -17,8 +18,12 @@ const LoggedModal = ({ openModal, setOpenModal, allValues }) => {
         }}
       >
         <h3>Thanks, {allValues.name}!</h3>
-        <h4>Your trip has been recorded</h4>
-        <div className='modalIcons'><BiPaperPlane /><BiWorld /><BiBookHeart /></div>
+        <h4>Your trip has been recorded.</h4>
+        <div className="icons">
+          <SlPlane />
+          <BiWorld />
+          <BiBookHeart />
+        </div>
         <nav>
           <ul>
             <li>

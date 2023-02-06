@@ -13,18 +13,16 @@
 
   .modal-container {
     background: linear-gradient(
-        90deg,
-        $secondary 0%,
-        rgba(255, 154, 0, 1) 10%,
-        rgba(208, 222, 33, 1) 20%,
-        rgba(79, 220, 74, 1) 30%,
-        rgba(63, 218, 216, 1) 40%,
-        rgba(47, 201, 226, 1) 50%,
-        rgba(28, 127, 238, 1) 60%,
-        rgba(95, 21, 242, 1) 70%,
-        rgba(186, 12, 248, 1) 80%,
-        rgba(251, 7, 217, 1) 90%,
-        $secondary 100%
+      90deg,
+      rgba(255, 154, 0, 0.8) 10%,
+      rgba(208, 222, 33, 0.8) 20%,
+      rgba(79, 220, 74, 0.8) 30%,
+      rgba(63, 218, 216, 0.8) 40%,
+      rgba(47, 201, 226, 0.8) 50%,
+      rgba(28, 127, 238, 0.8) 60%,
+      rgba(95, 21, 242, 0.8) 70%,
+      rgba(186, 12, 248, 0.8) 80%,
+      rgba(251, 7, 217, 0.8) 90%
     );
     display: flex;
     flex-direction: column;
@@ -35,7 +33,10 @@
     gap: 50px;
   }
 
-  h3, h4, .modalIcons, nav {
+  h3,
+  h4,
+  .icons,
+  nav {
     margin: 0;
     padding: 0;
   }
@@ -58,7 +59,7 @@
     }
   }
 
-  .modalIcons {
+  .icons {
     color: $primary;
     font-size: 2rem;
   }

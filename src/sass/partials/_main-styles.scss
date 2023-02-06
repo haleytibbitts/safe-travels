@@ -22,10 +22,22 @@ li {
   list-style: none;
 }
 
+a {
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
 a,
 button {
   text-decoration: none;
   color: $primary;
+  transition: all 0.5s ease-in-out;
+
+  &:hover,
+  &:focus {
+    text-shadow: $primary 0 0 10px;
+    box-shadow: 0 0 10px 5px $primary;
+  }
 }
 
 span {
@@ -70,6 +82,18 @@ h4 {
   font-size: 2rem;
 }
 
+input,
+select,
+textarea {
+  transition: all 0.5s ease-in-out;
+
+  &:hover,
+  &:focus {
+    text-shadow: $primary 0 0 10px;
+    box-shadow: 0 0 10px 5px $primary;
+  }
+}
+
 ul {
   padding-left: 0;
 }
@@ -77,6 +101,12 @@ ul {
 li {
   font-family: $sans;
   font-size: 1rem;
+
+  .icon {
+    margin-right: 5px;
+    position: relative;
+    top: 3px;
+  }
 }
 
 .body {
@@ -84,26 +114,35 @@ li {
   background-position: bottom;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  position: relative;
 }
 
 header {
   background: linear-gradient(
-        90deg,
-        rgba(255, 154, 0, 0.4) 0%,
-        rgba(208, 222, 33, 0.4) 2%,
-        rgba(79, 220, 74, 0.4) 4%,
-        rgba(63, 218, 216, 0.4) 6%,
-        rgba(47, 201, 226, 0.4) 8%,
-        rgba(28, 127, 238, 0.4) 10%,
-        rgba(95, 21, 242, 0.4) 12%,
-        rgba(186, 12, 248, 0.4) 14%,
-        rgba(251, 7, 217, 0.4) 15%,
-        $secondary 100%
-    );
+    90deg,
+    rgba(255, 154, 0, 0.4) 0%,
+    rgba(208, 222, 33, 0.4) 4%,
+    rgba(79, 220, 74, 0.4) 8%,
+    rgba(63, 218, 216, 0.4) 12%,
+    rgba(47, 201, 226, 0.4) 16%,
+    rgba(28, 127, 238, 0.4) 20%,
+    rgba(95, 21, 242, 0.4) 28%,
+    rgba(0, 0, 0, 0.4) 50%
+  );
   padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  h1 {
+    .icon {
+      font-size: 1.75rem;
+      display: inline-block;
+      margin-left: 10px;
+      position: relative;
+      top: 3px;
+    }
+  }
 
   nav {
     width: 40%;

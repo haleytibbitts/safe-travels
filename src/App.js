@@ -2,7 +2,8 @@
 import { useState, useEffect } from "react";
 import { Route, Routes, Link, useLocation } from "react-router-dom";
 import { getDatabase, push, ref, set, onValue } from "firebase/database";
-import { BiWorld, BiBookHeart, BiPaperPlane } from "react-icons/bi";
+import { BiWorld, BiBookHeart } from "react-icons/bi";
+import { SlPlane } from "react-icons/sl";
 
 //Components
 import firebase from "./firebase";
@@ -155,7 +156,10 @@ function App() {
       <header id="header">
         {useLocation().pathname === "/" ? undefined : (
           <>
-            <h1>Safe Travels</h1>
+            <h1>
+              Safe Travels
+              <BiWorld className="icon" />
+            </h1>
             <NavBar />
           </>
         )}

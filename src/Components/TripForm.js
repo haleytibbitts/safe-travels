@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { BiBookHeart } from "react-icons/bi";
 import FormInput from "./FormInput";
 import LoggedModal from "./LoggedModal";
 
@@ -72,7 +73,7 @@ const TripForm = ({
           allValues={allValues}
         />
       </fieldset>
-      <legend>Tell us about your trip!</legend>
+      <legend id="tripQ-start">Tell us about your trip!</legend>
       <fieldset id="tripQs" className="tripQs">
         <div className="input-container">
           <label htmlFor="country">Country:</label>
@@ -163,6 +164,7 @@ const TripForm = ({
             setOpenModal(true);
           }}
         >
+          <BiBookHeart className="icon" />
           Log My Trip!
         </button>
       </fieldset>

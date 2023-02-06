@@ -104,4 +104,10 @@
       box-shadow: 0 0 10px 5px $primary;
     }
   }
+
+  button .icon {
+    margin-right: 5px;
+    position: relative;
+    top: 3px;
+  }
 }
