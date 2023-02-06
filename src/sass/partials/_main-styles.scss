@@ -1,0 +1,127 @@
+@use "./variables" as *;
+
+html {
+  font-size: 125%;
+}
+
+.wrapper {
+  margin: 0 auto;
+  width: 80%;
+  max-width: 1080px;
+}
+
+.img-container {
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+li {
+  list-style: none;
+}
+
+a,
+button {
+  text-decoration: none;
+  color: $primary;
+}
+
+span {
+  display: block;
+}
+
+h1 {
+  margin: 0;
+  font-family: $display;
+  color: $primary;
+}
+
+h2,
+h3,
+h4,
+legend {
+  text-align: center;
+  color: $primary;
+}
+
+h2,
+legend {
+  font-family: $display;
+  font-size: 4.5rem;
+  margin: 20px;
+}
+
+h3,
+label {
+  font-size: 1.5rem;
+}
+
+h3,
+h4,
+li,
+label {
+  font-family: $sans;
+}
+
+h4 {
+  font-weight: normal;
+  font-size: 2rem;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  font-family: $sans;
+  font-size: 1rem;
+}
+
+.body {
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+header {
+  background: linear-gradient(
+        90deg,
+        rgba(255, 154, 0, 0.4) 0%,
+        rgba(208, 222, 33, 0.4) 2%,
+        rgba(79, 220, 74, 0.4) 4%,
+        rgba(63, 218, 216, 0.4) 6%,
+        rgba(47, 201, 226, 0.4) 8%,
+        rgba(28, 127, 238, 0.4) 10%,
+        rgba(95, 21, 242, 0.4) 12%,
+        rgba(186, 12, 248, 0.4) 14%,
+        rgba(251, 7, 217, 0.4) 15%,
+        $secondary 100%
+    );
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  nav {
+    width: 40%;
+  }
+
+  ul {
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
+footer {
+  color: $primary;
+  text-align: center;
+
+  p {
+    margin: 0;
+    padding: 20px;
+  }
+}

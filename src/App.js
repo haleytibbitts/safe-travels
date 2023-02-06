@@ -1,21 +1,29 @@
+// Modules
+import { useState, useEffect } from "react";
+import { Route, Routes, Link, useLocation } from "react-router-dom";
+import { getDatabase, push, ref, set, onValue } from "firebase/database";
+import {BiWorld, BiBookHeart, BiPaperPlane} from 'react-icons/bi';
+
+//Components
 import firebase from "./firebase";
-import BadWordsFilter from "bad-words";
+// import BadWordsFilter from "bad-words";
 import TripForm from "./Components/TripForm";
 import AllTrips from "./Components/AllTrips";
-import { useState, useEffect } from "react";
-import {
-  getDatabase,
-  push,
-  ref,
-  set,
-  onChildAdded,
-  onValue,
-} from "firebase/database";
-import "./App.css";
+import ErrorPage from "./Components/ErrorPage";
+import Home from "./Components/Home";
+import NavBar from "./Components/NavBar";
+
+// Assets
+import "./sass/App.scss";
 
 function App() {
-  const Filter = require("bad-words");
-  const langFilter = new Filter();
+
+  useEffect(() => {
+    document.title = "Safe Travels";
+  }, []);
+
+  // const Filter = require("bad-words");
+  // const langFilter = new Filter();
 
   const [trips, setTrips] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
@@ -40,7 +48,7 @@ function App() {
   const handleInputChange = (e) => {
     setAllValues({
       ...allValues,
-      [e.target.name]: langFilter.clean(e.target.value),
+      [e.target.name]: e.target.value,
     });
 
     if (e.target.type === "checkbox") {
@@ -58,12 +66,12 @@ function App() {
     const newPostRef = push(postListRef);
     set(newPostRef, allValues);
     setAllValues({
-      name: "",
-      pronouns: "",
-      age: "",
-      gender: "",
-      sexuality: "",
-      ethnicity: "",
+      name: allValues.name,
+      pronouns: allValues.pronouns,
+      age: allValues.age,
+      gender: allValues.gender,
+      sexuality: allValues.sexuality,
+      ethnicity: allValues.ethnicity,
       city: "",
       country: "",
       arrivalDate: "",
@@ -80,7 +88,7 @@ function App() {
   useEffect(() => {
     // create a variable that holds our database details
     const database = getDatabase(firebase);
-    // create a variable that makesa reference to that database
+    // create a variable that makes a reference to that database
     const postListRef = ref(database, "posts");
     // get database info on load or on change
     onValue(postListRef, (response) => {
@@ -98,18 +106,89 @@ function App() {
     });
   }, []);
 
+  const [countryData, setCountryData] = useState([]);
+
+  // hook into initial/first render of app to fetch puppy photos
+  useEffect(() => {
+    fetch("https://countriesnow.space/api/v0.1/countries")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setCountryData(data.data);
+      });
+  }, []);
+
+  const [bgQuery, setBgQuery] = useState("");
+  const [background, setBackground] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const url = new URL("https://api.unsplash.com/search/photos");
+      url.search = new URLSearchParams({
+        client_id: "Gja01wZ3k0nuZjpWdToRUKRqgClg_m-jRxFHQ2hAEYY",
+        query: `${bgQuery} beautiful landscape`,
+      });
+
+      try {
+        const data = await fetch(url);
+        const response = await data.json();
+
+        const bestPic = response.results.reduce((prev, cur) => {
+          return prev.likes > cur.likes ? prev : cur;
+        });
+
+        setBackground(bestPic.urls.full);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [bgQuery]);
+
+  const bodyStyles = {
+    backgroundImage: "url(" + background + ")",
+    height: useLocation().pathname === "/" ? "100vh" : undefined,
+  };
+
   return (
-    <div>
-      <header>
-        <h1>Safe Travels</h1>
-        <h2>An inclusive travel log for the 2SLGBTQIA+ community.</h2>
+    <div className="body" style={bodyStyles}>
+      <header id="header">
+        {useLocation().pathname === "/" ? undefined : (
+          <>
+            <h1>Safe Travels</h1>
+            <NavBar />
+          </>
+        )}
       </header>
-      <TripForm
-        handleSubmit={handleSubmit}
-        handleInputChange={handleInputChange}
-        allValues={allValues}
-      />
-      <AllTrips trips={trips} />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/log"
+          element={
+            <TripForm
+              handleSubmit={handleSubmit}
+              handleInputChange={handleInputChange}
+              allValues={allValues}
+              countryData={countryData}
+            />
+          }
+        />
+        <Route
+          path="/trips"
+          element={
+            <AllTrips
+              trips={trips}
+              setTrips={setTrips}
+              countryData={countryData}
+            />
+          }
+        />
+        <Route path="*" element={ErrorPage} />
+      </Routes>
+
       <footer>
         <p>Made with 💖 by Haley Tibbitts</p>
       </footer>

@@ -1,0 +1,107 @@
+@use "./variables" as *;
+
+.trip-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  legend {
+    text-shadow: $secondary 0 0 10px;
+    padding: 20px;
+  }
+
+  label {
+    font-weight: bold;
+    color: $primary;
+  }
+
+  .input-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+  }
+
+  fieldset {
+    background-color: rgba($color: $secondary, $alpha: 0.5);
+    padding: 20px 40px 40px 40px;
+    border-radius: 20px;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  input,
+  select,
+  textarea {
+    background-color: $primary;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: $sans;
+
+    &::placeholder {
+      font-family: $sans;
+      color: gray;
+    }
+  }
+
+  textarea {
+    width: 70%;
+  }
+
+  option {
+    font-family: $sans;
+  }
+
+  .userQs {
+    width: 65%;
+  }
+
+  .tripQs {
+    align-items: center;
+
+    .input-container {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .safetyRating {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      p {
+        color: $primary;
+        font-size: 1.5rem;
+        font-family: $sans;
+        margin: 10px 0;
+      }
+      input {
+        padding-top: 0;
+      }
+    }
+
+    .faves,
+    .advice {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .log-trip {
+    border: 1px solid $primary;
+    background: transparent;
+    font-family: $sans;
+    padding: 20px 40px;
+    border-radius: 10px;
+    transition: all 0.5s ease-in-out;
+
+    &:hover,
+    &:focus {
+      text-shadow: $primary 0 0 10px;
+      box-shadow: 0 0 10px 5px $primary;
+    }
+  }
+}
