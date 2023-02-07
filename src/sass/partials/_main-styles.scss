@@ -2,6 +2,7 @@
 
 html {
   font-size: 125%;
+  background-color: $secondary;
 }
 
 .wrapper {
@@ -53,6 +54,9 @@ h1 {
 h2,
 h3,
 h4,
+h5,
+h6,
+p,
 legend {
   text-align: center;
   color: $primary;
@@ -72,9 +76,16 @@ label {
 
 h3,
 h4,
+h5,
+h6,
+p,
 li,
 label {
   font-family: $sans;
+}
+
+p {
+  text-shadow: $secondary 0 0 4px;
 }
 
 h4 {
@@ -82,15 +93,30 @@ h4 {
   font-size: 2rem;
 }
 
+label {
+  font-weight: bold;
+  color: $primary;
+}
+
 input,
 select,
 textarea {
+  background-color: $primary;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-family: $sans;
   transition: all 0.5s ease-in-out;
 
   &:hover,
   &:focus {
     text-shadow: $primary 0 0 10px;
     box-shadow: 0 0 10px 5px $primary;
+  }
+
+  &::placeholder {
+    font-family: $sans;
+    color: gray;
   }
 }
 
@@ -111,6 +137,39 @@ li {
     position: relative;
     top: 3px;
   }
+}
+
+.zero,
+.one,
+.two,
+.three,
+.four,
+.five {
+  border-radius: 50%;
+}
+
+.zero {
+  background-color: #cc3232;
+}
+
+.one {
+  background-color: #db7b2b;
+}
+
+.two {
+  background-color: #e7b416;
+}
+
+.three {
+  background-color: #e0e716;
+}
+
+.four {
+  background-color: #99c140;
+}
+
+.five {
+  background-color: #2dc937;
 }
 
 .body {

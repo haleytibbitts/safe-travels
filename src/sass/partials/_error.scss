@@ -1,0 +1,23 @@
+@use "./variables" as *;
+
+.error {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+
+  .text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba($color: $secondary, $alpha: 0.4);
+    border-radius: 20px;
+    padding: 30px 50px;
+  }
+
+  .icon {
+    color: $primary;
+    font-size: 3rem;
+  }
+}

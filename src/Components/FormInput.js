@@ -27,7 +27,23 @@ const FormInput = ({
       <div className={"input-container " + dataType}>
         <label htmlFor={dataType}>{label}</label>
         {dataType === "safetyRating" ? (
-          <p>{allValues.safetyRating}</p>
+          <p
+            className={
+              allValues.safetyRating === "1"
+                ? "one"
+                : allValues.safetyRating === "2"
+                ? "two"
+                : allValues.safetyRating === "3"
+                ? "three"
+                : allValues.safetyRating === "4"
+                ? "four"
+                : allValues.safetyRating === "5"
+                ? "five"
+                : "zero"
+            }
+          >
+            {allValues.safetyRating}
+          </p>
         ) : undefined}
         <input
           type={inputType}

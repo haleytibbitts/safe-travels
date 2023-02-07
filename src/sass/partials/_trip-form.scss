@@ -10,11 +10,6 @@
     padding: 20px;
   }
 
-  label {
-    font-weight: bold;
-    color: $primary;
-  }
-
   .input-container {
     display: flex;
     gap: 20px;
@@ -94,6 +89,15 @@
       input {
         padding-top: 0;
       }
+    }
+
+    .zero,
+    .one,
+    .two,
+    .three,
+    .four,
+    .five {
+      padding: 5px 15px;
     }
 
     .faves,

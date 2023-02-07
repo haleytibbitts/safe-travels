@@ -58,71 +58,100 @@ const AllTrips = ({
   }, [searchValue, trips]);
 
   return (
-    <section>
-      <label htmlFor="countrySearch">Enter a Country:</label>
-      <select id="countrySearch" onChange={handleSearchChange}>
-        <option value="">Select:</option>
-        {countryData.length
-          ? countryData.map((container, indexNumber) => {
-              return (
-                <option
-                  key={indexNumber + container.country}
-                  value={container.country}
-                >
-                  {container.country}
-                </option>
-              );
-            })
-          : undefined}
-      </select>
-
-      <label htmlFor="citySearch">Enter a City:</label>
-      <select id="citySearch" onChange={handleSearchChange}>
-        <option value="">Select:</option>
-        {countryData.length
-          ? countryData.map((container) => {
-              if (container.country === searchValue.countrySearch) {
-                return container.cities.map((city) => {
+    <section className="all-trips">
+      <form>
+        <div className="input-container">
+          <label htmlFor="countrySearch">Country:</label>
+          <select id="countrySearch" onChange={handleSearchChange}>
+            <option value="">Select:</option>
+            {countryData.length
+              ? countryData.map((container, indexNumber) => {
                   return (
-                    <option key={city + searchValue.countrySearch} value={city}>
-                      {city}
+                    <option
+                      key={indexNumber + container.country}
+                      value={container.country}
+                    >
+                      {container.country}
                     </option>
                   );
-                });
-              }
-            })
-          : undefined}
-      </select>
-
-      {(filteredTrips.length ? filteredTrips : trips)
-        .slice(0)
-        .reverse()
-        .map((trip) => {
-          return (
-            <div key={trip.key}>
-              <h3>
-                {trip.tripInfo.city}, {trip.tripInfo.country}
-              </h3>
-              <h4>
-                Logged by {trip.tripInfo.name} ({trip.tripInfo.pronouns})
-              </h4>
-              <h5>
-                {trip.tripInfo.age} | {trip.tripInfo.gender} |{" "}
-                {trip.tripInfo.sexuality} | {trip.tripInfo.ethnicity} |{" "}
-                {trip.tripInfo.partnered ? "Partnered" : "Non-Partnered"}
-              </h5>
-              <h6>
-                {trip.tripInfo.arrivalDate} to {trip.tripInfo.returnDate}
-              </h6>
-              <p>
-                Safety Rating:{" "}
-                {trip.tripInfo.safetyRating ? trip.tripInfo.safetyRating : "0"}
-              </p>
-              <p>Highlights: {trip.tripInfo.faves}</p>
-              <p>Advice: {trip.tripInfo.advice}</p>
-            </div>
-          );
-        })}
+                })
+              : undefined}
+          </select>
+        </div>
+        <div className="input-container">
+          <label htmlFor="citySearch">City:</label>
+          <select id="citySearch" onChange={handleSearchChange}>
+            <option value="">Select:</option>
+            {countryData.length
+              ? countryData.map((container) => {
+                  if (container.country === searchValue.countrySearch) {
+                    return container.cities.map((city) => {
+                      return (
+                        <option
+                          key={city + searchValue.countrySearch}
+                          value={city}
+                        >
+                          {city}
+                        </option>
+                      );
+                    });
+                  }
+                })
+              : undefined}
+          </select>
+        </div>
+      </form>
+      <div className="trips">
+        {(filteredTrips.length ? filteredTrips : trips)
+          .slice(0)
+          .reverse()
+          .map((trip) => {
+            return (
+              <>
+                <div key={trip.key} className="trip-container">
+                  <h3>
+                    {trip.tripInfo.city}, {trip.tripInfo.country}
+                  </h3>
+                  <h4>
+                    Logged by {trip.tripInfo.name} ({trip.tripInfo.pronouns})
+                  </h4>
+                  <h5>
+                    {trip.tripInfo.age} | {trip.tripInfo.gender} |{" "}
+                    {trip.tripInfo.sexuality} | {trip.tripInfo.ethnicity} |{" "}
+                    {trip.tripInfo.partnered ? "Partnered" : "Non-Partnered"}
+                  </h5>
+                  <h6>
+                    {trip.tripInfo.arrivalDate} to {trip.tripInfo.returnDate}
+                  </h6>
+                  <div className="safetyRating">
+                    <p>Safety Rating: </p>
+                    <p
+                      className={
+                        trip.tripInfo.safetyRating === "1"
+                          ? "one"
+                          : trip.tripInfo.safetyRating === "2"
+                          ? "two"
+                          : trip.tripInfo.safetyRating === "3"
+                          ? "three"
+                          : trip.tripInfo.safetyRating === "4"
+                          ? "four"
+                          : trip.tripInfo.safetyRating === "5"
+                          ? "five"
+                          : "zero"
+                      }
+                    >
+                      {trip.tripInfo.safetyRating
+                        ? trip.tripInfo.safetyRating
+                        : "0"}
+                    </p>
+                  </div>
+                  <p>Highlights: {trip.tripInfo.faves}</p>
+                  <p>Advice: {trip.tripInfo.advice}</p>
+                </div>
+              </>
+            );
+          })}
+      </div>
     </section>
   );
 };

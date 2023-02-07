@@ -157,57 +157,76 @@ function App() {
     }
   }, [searchValue.countrySearch]);
 
+  const pathName = useLocation().pathname;
+
   const bodyStyles = {
-    backgroundImage: "url(" + background + ")",
-    height: useLocation().pathname === "/" ? "100vh" : undefined,
+    backgroundImage:
+      "url(" +
+      `${
+        pathName === "/"
+          ? background
+          : pathName === "/log"
+          ? background
+          : pathName === "/trips"
+          ? background
+          : "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2113&q=80"
+      }` +
+      ")",
+    height:
+      pathName === "/trips"
+        ? undefined
+        : pathName === "/log"
+        ? undefined
+        : "100vh",
   };
 
   return (
-    <div className="body" style={bodyStyles}>
-      <header id="header">
-        {useLocation().pathname === "/" ? undefined : (
-          <>
-            <h1>
-              Safe Travels
-              <BiWorld className="icon" />
-            </h1>
-            <NavBar />
-          </>
-        )}
-      </header>
+    <>
+      <div className="body" style={bodyStyles}>
+        <header id="header">
+          {pathName === "/" ? undefined : (
+            <>
+              <h1>
+                Safe Travels
+                <BiWorld className="icon" />
+              </h1>
+              <NavBar />
+            </>
+          )}
+        </header>
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/log"
-          element={
-            <TripForm
-              handleSubmit={handleSubmit}
-              handleInputChange={handleInputChange}
-              allValues={allValues}
-              countryData={countryData}
-            />
-          }
-        />
-        <Route
-          path="/trips"
-          element={
-            <AllTrips
-              trips={trips}
-              setTrips={setTrips}
-              countryData={countryData}
-              searchValue={searchValue}
-              setSearchValue={setSearchValue}
-            />
-          }
-        />
-        <Route path="*" element={ErrorPage} />
-      </Routes>
-
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/log"
+            element={
+              <TripForm
+                handleSubmit={handleSubmit}
+                handleInputChange={handleInputChange}
+                allValues={allValues}
+                countryData={countryData}
+              />
+            }
+          />
+          <Route
+            path="/trips"
+            element={
+              <AllTrips
+                trips={trips}
+                setTrips={setTrips}
+                countryData={countryData}
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+              />
+            }
+          />
+          <Route path="*" element={<ErrorPage homePage={<Home />} />} />
+        </Routes>
+      </div>
       <footer>
         <p>Made with 💖 by Haley Tibbitts</p>
       </footer>
-    </div>
+    </>
   );
 }
 
