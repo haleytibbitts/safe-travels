@@ -118,7 +118,7 @@ function App() {
       });
   }, []);
 
-  const [bgQuery, setBgQuery] = useState("");
+  const [bgQuery, setBgQuery] = useState("beautiful");
   const [background, setBackground] = useState("");
 
   useEffect(() => {
@@ -126,7 +126,7 @@ function App() {
       const url = new URL("https://api.unsplash.com/search/photos");
       url.search = new URLSearchParams({
         client_id: "Gja01wZ3k0nuZjpWdToRUKRqgClg_m-jRxFHQ2hAEYY",
-        query: `${bgQuery} beautiful landscape`,
+        query: `${bgQuery} landscape`,
       });
 
       try {
@@ -145,6 +145,17 @@ function App() {
 
     fetchData();
   }, [bgQuery]);
+
+  const [searchValue, setSearchValue] = useState({
+    citySearch: "",
+    countrySearch: "",
+  });
+
+  useEffect(() => {
+    if (searchValue.countrySearch) {
+      setBgQuery(searchValue.countrySearch);
+    }
+  }, [searchValue.countrySearch]);
 
   const bodyStyles = {
     backgroundImage: "url(" + background + ")",
@@ -185,6 +196,8 @@ function App() {
               trips={trips}
               setTrips={setTrips}
               countryData={countryData}
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
             />
           }
         />

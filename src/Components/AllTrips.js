@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { onValue, ref, getDatabase } from "firebase/database";
 import firebase from "../firebase";
 
-const AllTrips = ({ trips, setTrips, countryData }) => {
-  const [searchValue, setSearchValue] = useState({
-    citySearch: "",
-    countrySearch: "",
-  });
+const AllTrips = ({
+  trips,
+  setTrips,
+  countryData,
+  searchValue,
+  setSearchValue,
+}) => {
   const [filteredTrips, setFilteredTrips] = useState([]);
 
   const handleSearchChange = (e) => {

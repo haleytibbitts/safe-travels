@@ -16,6 +16,7 @@ const FormInput = ({
           id={dataType}
           cols="30"
           rows="10"
+          value={allValues[dataType]}
           placeholder={placeholder}
           onChange={handleInputChange}
         ></textarea>
@@ -36,7 +37,6 @@ const FormInput = ({
           value={inputType === "checkbox" ? isChecked : allValues[dataType]}
           min={inputType === "range" ? 0 : undefined}
           max={inputType === "range" ? 5 : undefined}
-          required="required"
           placeholder={placeholder}
         />
       </div>
