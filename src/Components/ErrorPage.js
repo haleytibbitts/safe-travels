@@ -1,4 +1,7 @@
+// Modules
 import { BiPlanet } from "react-icons/bi";
+
+// Components
 import AnimatedPage from "./AnimatedPage";
 
 const ErrorPage = ({ homePage }) => {

@@ -53,7 +53,7 @@
     font-family: $sans;
   }
 
-  .userQs {
+  .user-qs {
     width: 65%;
     margin: 0 40px;
 
@@ -72,8 +72,9 @@
     }
   }
 
-  .tripQs {
+  .trip-qs {
     align-items: center;
+    margin-bottom: 40px;
 
     label {
       text-align: center;

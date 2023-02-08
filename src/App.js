@@ -1,32 +1,34 @@
 // Modules
 import { useState, useEffect } from "react";
-import { Route, Routes, Link, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { getDatabase, push, ref, set, onValue } from "firebase/database";
-import { BiWorld, BiBookHeart, BiHeart } from "react-icons/bi";
-import { SlPlane } from "react-icons/sl";
+import { BiWorld, BiHeart } from "react-icons/bi";
 
 //Components
-import firebase from "./firebase";
-// import BadWordsFilter from "bad-words";
 import TripForm from "./Components/TripForm";
 import AllTrips from "./Components/AllTrips";
 import ErrorPage from "./Components/ErrorPage";
 import Home from "./Components/Home";
 import NavBar from "./Components/NavBar";
+import AnimatedPage from "./Components/AnimatedPage";
 
 // Assets
+import firebase from "./firebase";
 import "./sass/App.scss";
 
 function App() {
+  // Title change on mount
   useEffect(() => {
     document.title = "Safe Travels";
   }, []);
 
-  // const Filter = require("bad-words");
-  // const langFilter = new Filter();
-
+  // List of logged trips saved in state
   const [trips, setTrips] = useState([]);
+
+  // Feedback from listener to see if our checkbox is checked or unchecked
   const [isChecked, setIsChecked] = useState(false);
+
+  // Feedback from listener to capture input values as they change
   const [allValues, setAllValues] = useState({
     name: "",
     pronouns: "",
@@ -45,6 +47,16 @@ function App() {
     advice: "",
   });
 
+  // List of countries fetched from API and saved in state
+  const [countryData, setCountryData] = useState([]);
+
+  // Feedback from listener to see what country the user chooses so we can dynamically change the background
+  const [bgQuery, setBgQuery] = useState("beautiful");
+
+  // Background image from Unsplash API saved in state
+  const [background, setBackground] = useState("");
+
+  // Handler to listen for changes in input values
   const handleInputChange = (e) => {
     setAllValues({
       ...allValues,
@@ -60,6 +72,7 @@ function App() {
     }
   };
 
+  // Handler to submit trip information to firebase database
   const handleSubmit = () => {
     const database = getDatabase(firebase);
     const postListRef = ref(database, "posts");
@@ -84,6 +97,13 @@ function App() {
     setIsChecked(false);
   };
 
+  // Store changes in value when the user searches for a trip
+  const [searchValue, setSearchValue] = useState({
+    citySearch: "",
+    countrySearch: "",
+  });
+
+  // Collects trip data from firebase database on component mount and change in database
   useEffect(() => {
     const database = getDatabase(firebase);
     const postListRef = ref(database, "posts");
@@ -97,8 +117,7 @@ function App() {
     });
   }, []);
 
-  const [countryData, setCountryData] = useState([]);
-
+  // Fetch country and city information from API on component mount
   useEffect(() => {
     fetch("https://countriesnow.space/api/v0.1/countries")
       .then((response) => {
@@ -109,9 +128,7 @@ function App() {
       });
   }, []);
 
-  const [bgQuery, setBgQuery] = useState("beautiful");
-  const [background, setBackground] = useState("");
-
+  // Fetch a new background image when a user selects a new country (bgQuery)
   useEffect(() => {
     const fetchData = async () => {
       const url = new URL("https://api.unsplash.com/search/photos");
@@ -124,32 +141,34 @@ function App() {
         const data = await fetch(url);
         const response = await data.json();
 
+        // Reduce array to find the best picture (the most likes)
         const bestPic = response.results.reduce((prev, cur) => {
           return prev.likes > cur.likes ? prev : cur;
         });
 
         setBackground(bestPic.urls.full);
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     };
 
     fetchData();
   }, [bgQuery]);
 
-  const [searchValue, setSearchValue] = useState({
-    citySearch: "",
-    countrySearch: "",
-  });
-
+  // Change the background image when country search values are updated
   useEffect(() => {
     if (searchValue.countrySearch) {
       setBgQuery(searchValue.countrySearch);
+    } else if (allValues.country) {
+      setBgQuery(allValues.country);
     }
-  }, [searchValue.countrySearch]);
+  }, [allValues.country, searchValue.countrySearch]);
 
+  // Path name variable for conditional rendering
   const pathName = useLocation().pathname;
 
+  // Object storing conditionals and variables to be passed as inline styling
+  // Special background for error component, specified height on home and error components
   const bodyStyles = {
     backgroundImage:
       "url(" +
@@ -186,33 +205,35 @@ function App() {
           )}
         </header>
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/log"
-            element={
-              <TripForm
-                handleSubmit={handleSubmit}
-                handleInputChange={handleInputChange}
-                allValues={allValues}
-                countryData={countryData}
-              />
-            }
-          />
-          <Route
-            path="/trips"
-            element={
-              <AllTrips
-                trips={trips}
-                setTrips={setTrips}
-                countryData={countryData}
-                searchValue={searchValue}
-                setSearchValue={setSearchValue}
-              />
-            }
-          />
-          <Route path="*" element={<ErrorPage homePage={<Home />} />} />
-        </Routes>
+        <AnimatedPage>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/log"
+              element={
+                <TripForm
+                  handleSubmit={handleSubmit}
+                  handleInputChange={handleInputChange}
+                  allValues={allValues}
+                  countryData={countryData}
+                />
+              }
+            />
+            <Route
+              path="/trips"
+              element={
+                <AllTrips
+                  trips={trips}
+                  setTrips={setTrips}
+                  countryData={countryData}
+                  searchValue={searchValue}
+                  setSearchValue={setSearchValue}
+                />
+              }
+            />
+            <Route path="*" element={<ErrorPage homePage={<Home />} />} />
+          </Routes>
+        </AnimatedPage>
       </div>
       <footer>
         <p>
@@ -225,28 +246,3 @@ function App() {
 }
 
 export default App;
-
-// ** Intro Component **
-// Prompt users to fill out information about themselves to be stored as a firebase object (userInfo)
-// Create state items to watch for and capture user inputs.
-// On submit, page re-renders to display home page component (useEffect).
-// If user has already done this step, app will bypass this component
-
-// ** Home Page Component **
-// Display user information stored in firebase object
-// Create state items for two button options: log a new trip, or view trip history.
-// Re-render page based on user's choice (useEffect).
-
-// ** New Trip Component **
-// Prompt users to fill out information about their trip to be stored inside of firebase object (tripsLogged).
-// Create state items to watch for and capture user inputs.
-// On submit, store new trip information in trip history firebase object (tripsLogged), re-render page to display trip history (useEffect).
-
-// ** Trip History Component **
-// Users will have access to their trip history by having firebase object (tripsLogged) displayed on page.
-
-// All pages with have access to a navigation that allows you to jump back to the home page (useEffect).
-
-// STRETCH GOALS:
-// Create a component to see other people's trip logs with search functionality.
-// Implement achievement system that unlocks a badge every time you log a new country.

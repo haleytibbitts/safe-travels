@@ -1,6 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
 import { BiBookHeart, BiInfoCircle } from "react-icons/bi";
-import { useLocation, useNavigate } from "react-router-dom";
 import AnimatedPage from "./AnimatedPage";
 import FormInput from "./FormInput";
 import Swal from "sweetalert2";
@@ -13,6 +11,7 @@ const TripForm = ({
   isChecked,
   countryData,
 }) => {
+  // Ensure that users fill out all fields before submission can be processed
   const validateForm = () => {
     if (
       allValues.name &&
@@ -35,6 +34,7 @@ const TripForm = ({
     }
   };
 
+  // Alert to inform user submission was successful
   const tripLogged = {
     title: `Thanks, ${allValues.name}!`,
     text: ` Your trip to ${allValues.city} has been recorded.`,
@@ -43,19 +43,15 @@ const TripForm = ({
     iconColor: "#fff",
     background: `linear-gradient(
       90deg,
-      rgb(255, 154, 0) 10%,
-      rgb(208, 222, 33) 20%,
-      rgb(79, 220, 74) 30%,
-      rgb(63, 218, 216) 40%,
-      rgb(47, 201, 226) 50%,
-      rgb(28, 127, 238) 60%,
-      rgb(95, 21, 242) 70%,
-      rgb(186, 12, 248) 80%,
-      rgb(251, 7, 217) 90%
+      rgb(28, 127, 238) 25%,
+      rgb(95, 21, 242) 50%,
+      rgb(186, 12, 248) 75%,
+      rgb(251, 7, 217) 100%
     )`,
     confirmButtonColor: "#000",
   };
 
+  // Alert to inform user that they missed some fields
   const formError = {
     title: `Oops!`,
     text: `Please fill out all of the fields.`,
@@ -64,19 +60,15 @@ const TripForm = ({
     iconColor: "#fff",
     background: `linear-gradient(
       90deg,
-      rgb(255, 154, 0) 10%,
-      rgb(208, 222, 33) 20%,
-      rgb(79, 220, 74) 30%,
-      rgb(63, 218, 216) 40%,
-      rgb(47, 201, 226) 50%,
-      rgb(28, 127, 238) 60%,
-      rgb(95, 21, 242) 70%,
-      rgb(186, 12, 248) 80%,
-      rgb(251, 7, 217) 90%
+      rgb(28, 127, 238) 25%,
+      rgb(95, 21, 242) 50%,
+      rgb(186, 12, 248) 75%,
+      rgb(251, 7, 217) 100%
     )`,
     confirmButtonColor: "#000",
   };
 
+  // Informational pop-up explaining why they need to include their personal details
   const formInfo = {
     title: `"Why are the details about my identity important?"`,
     text: `Our identities shape how we navigate and experience the world around us. This can be a blessing, but it can also be a great source of anxiety for many marginalized folks when it comes to traveling. By sharing your details and a first-hand account of your experiences, you can help other members of your community see what different parts of the world are like from your shared perspective.`,
@@ -85,15 +77,10 @@ const TripForm = ({
     iconColor: "#fff",
     background: `linear-gradient(
       90deg,
-      rgb(255, 154, 0) 10%,
-      rgb(208, 222, 33) 20%,
-      rgb(79, 220, 74) 30%,
-      rgb(63, 218, 216) 40%,
-      rgb(47, 201, 226) 50%,
-      rgb(28, 127, 238) 60%,
-      rgb(95, 21, 242) 70%,
-      rgb(186, 12, 248) 80%,
-      rgb(251, 7, 217) 90%
+      rgb(28, 127, 238) 25%,
+      rgb(95, 21, 242) 50%,
+      rgb(186, 12, 248) 75%,
+      rgb(251, 7, 217) 100%
     )`,
     confirmButtonColor: "#000",
   };
@@ -109,7 +96,7 @@ const TripForm = ({
         }}
       >
         <legend>Tell us about yourself!</legend>
-        <fieldset id="userQs" className="userQs">
+        <fieldset id="userQs" className="user-qs">
           <FormInput
             label="First Name:"
             dataType="name"
@@ -167,7 +154,7 @@ const TripForm = ({
           />
         </fieldset>
         <legend id="tripQ-start">Tell us about your trip!</legend>
-        <fieldset id="tripQs" className="tripQs">
+        <fieldset id="tripQs" className="trip-qs">
           <div className="input-container">
             <label htmlFor="country">Country:</label>
             <select id="country" name="country" onChange={handleInputChange}>

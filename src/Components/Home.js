@@ -1,13 +1,8 @@
 // Modules
-import { useEffect, useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
 import { BiWorld } from "react-icons/bi";
 
 // Components
 import NavBar from "./NavBar";
-
-// Assets
-import firebase from "../firebase";
 import AnimatedPage from "./AnimatedPage";
 
 const Home = () => {

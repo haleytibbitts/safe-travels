@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { onValue, ref, getDatabase } from "firebase/database";
 import AnimatedPage from "./AnimatedPage";
-import firebase from "../firebase";
+import Swal from "sweetalert2";
 
 const AllTrips = ({
   trips,
@@ -10,8 +9,10 @@ const AllTrips = ({
   searchValue,
   setSearchValue,
 }) => {
+  // Stateful variable that holds trips filtered by user selection
   const [filteredTrips, setFilteredTrips] = useState([]);
 
+  // Handler for changes in user selection
   const handleSearchChange = (e) => {
     if (
       searchValue.citySearch &&
@@ -30,32 +31,29 @@ const AllTrips = ({
     }
   };
 
+  // Set search values based on user interaction with city and country input (searchValue)
   useEffect(() => {
+    let newData = [];
+
     if (searchValue.citySearch && searchValue.countrySearch) {
       const cityData = trips.filter((trip) => {
         return trip.tripInfo.city.includes(searchValue.citySearch);
       });
 
-      const newData = cityData.filter((trip) => {
+      newData = cityData.filter((trip) => {
         return trip.tripInfo.country.includes(searchValue.countrySearch);
       });
-
-      setFilteredTrips(newData);
     } else if (searchValue.citySearch && !searchValue.countrySearch) {
-      const newData = trips.filter((trip) => {
+      newData = trips.filter((trip) => {
         return trip.tripInfo.city.includes(searchValue.citySearch);
       });
-
-      setFilteredTrips(newData);
     } else if (!searchValue.citySearch && searchValue.countrySearch) {
-      const newData = trips.filter((trip) => {
+      newData = trips.filter((trip) => {
         return trip.tripInfo.country.includes(searchValue.countrySearch);
       });
-
-      setFilteredTrips(newData);
-    } else {
-      setFilteredTrips([]);
     }
+
+    setFilteredTrips(newData);
   }, [searchValue, trips]);
 
   return (
@@ -125,7 +123,7 @@ const AllTrips = ({
                     <h6>
                       {trip.tripInfo.arrivalDate} to {trip.tripInfo.returnDate}
                     </h6>
-                    <div className="safetyRating">
+                    <div className="safety-rating">
                       <p>Safety Rating: </p>
                       <p
                         className={

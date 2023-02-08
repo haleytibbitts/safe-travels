@@ -138,6 +138,8 @@ li {
 .four,
 .five {
   border-radius: 50%;
+  color: $secondary;
+  text-shadow: $primary 0 0 10px;
 }
 
 .zero {
