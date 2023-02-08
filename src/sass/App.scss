@@ -5,3 +5,6 @@
 @use "./partials/trip-form";
 @use "./partials/all-trips";
 @use "./partials/error";
+@use "./partials/mq-medium";
+@use "./partials/mq-tablet";
+@use "./partials/mq-mobile";

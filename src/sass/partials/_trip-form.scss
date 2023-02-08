@@ -10,6 +10,10 @@
     padding: 20px;
   }
 
+  label {
+    text-align: right;
+  }
+
   .input-container {
     display: flex;
     gap: 20px;
@@ -51,6 +55,7 @@
 
   .userQs {
     width: 65%;
+    margin: 0 40px;
 
     .icon {
       color: $primary;
@@ -69,6 +74,10 @@
 
   .tripQs {
     align-items: center;
+
+    label {
+      text-align: center;
+    }
 
     .input-container {
       width: 100%;

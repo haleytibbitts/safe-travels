@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Route, Routes, Link, useLocation } from "react-router-dom";
 import { getDatabase, push, ref, set, onValue } from "firebase/database";
-import { BiWorld, BiBookHeart } from "react-icons/bi";
+import { BiWorld, BiBookHeart, BiHeart } from "react-icons/bi";
 import { SlPlane } from "react-icons/sl";
 
 //Components
@@ -85,29 +85,20 @@ function App() {
   };
 
   useEffect(() => {
-    // create a variable that holds our database details
     const database = getDatabase(firebase);
-    // create a variable that makes a reference to that database
     const postListRef = ref(database, "posts");
-    // get database info on load or on change
     onValue(postListRef, (response) => {
-      // use firebase's .val() to parse our database info into the formal we need
       const data = response.val();
-      // create an empty array (cannot push to state, must use setState)
       const newState = [];
-      // data is an object, so we iterate through it using a for in loop to access each book name
       for (let key in data) {
-        // inside loop, we push each book name into the empty array
         newState.push({ key: key, tripInfo: data[key] });
       }
-      // set state to match no-longer-empty array
       setTrips(newState);
     });
   }, []);
 
   const [countryData, setCountryData] = useState([]);
 
-  // hook into initial/first render of app to fetch puppy photos
   useEffect(() => {
     fetch("https://countriesnow.space/api/v0.1/countries")
       .then((response) => {
@@ -224,7 +215,10 @@ function App() {
         </Routes>
       </div>
       <footer>
-        <p>Made with 💖 by Haley Tibbitts</p>
+        <p>
+          Made with <BiHeart className="icon" /> in 2023 by{" "}
+          <a href="https://www.haleytibbitts.com/">Haley Tibbitts</a>
+        </p>
       </footer>
     </>
   );
