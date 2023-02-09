@@ -1,0 +1,77 @@
+@use "./variables" as *;
+
+.all-trips {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgba($color: $secondary, $alpha: 0.4);
+    border-radius: 20px;
+    margin: 50px 10px;
+    padding: 30px 50px;
+    gap: 20px;
+
+    .input-container {
+      display: flex;
+      align-items: center;
+    }
+    select {
+      margin-left: 10px;
+    }
+  }
+
+  .trips {
+    padding: 0 50px 50px 50px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .trip-container {
+    background-color: rgba($color: $secondary, $alpha: 0.4);
+    width: 40%;
+    border-radius: 20px;
+    padding: 30px 50px;
+    transition: all 0.5s ease-in-out;
+
+    &:hover {
+      background-color: rgba($color: $secondary, $alpha: 0.8);
+    }
+  }
+
+  h3 {
+    margin: 15px 0;
+  }
+
+  h4 {
+    margin: 25px 0;
+  }
+
+  h6 {
+    margin-bottom: 15px;
+  }
+
+  .safety-rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .zero,
+  .one,
+  .two,
+  .three,
+  .four,
+  .five {
+    padding: 5px 11px;
+    margin-left: 5px;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+}

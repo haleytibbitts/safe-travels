@@ -1,0 +1,130 @@
+@use "./variables" as *;
+
+@media (max-width: 768px) {
+  h2,
+  legend {
+    font-size: 2.5rem;
+    margin: 10px;
+  }
+
+  h3,
+  label {
+    font-size: 1rem;
+  }
+
+  h4 {
+    font-size: 1.2rem;
+  }
+
+  li {
+    font-size: 0.8rem;
+  }
+
+  header {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 154, 0, 0.6) 0%,
+      rgba(208, 222, 33, 0.6) 4%,
+      rgba(79, 220, 74, 0.6) 8%,
+      rgba(63, 218, 216, 0.6) 12%,
+      rgba(47, 201, 226, 0.6) 16%,
+      rgba(28, 127, 238, 0.6) 20%,
+      rgba(95, 21, 242, 0.6) 28%,
+      rgba(0, 0, 0, 0.6) 50%
+    );
+
+    h1 {
+      font-size: 1.6rem;
+      .icon {
+        font-size: 1.4rem;
+      }
+    }
+
+    nav {
+      width: 50%;
+    }
+
+    ul {
+      align-items: center;
+    }
+
+    a {
+      padding: 0;
+    }
+  }
+
+  .home {
+    .text-container {
+      background-color: rgba($color: $secondary, $alpha: 0.6);
+    }
+    ul {
+      gap: 10px;
+    }
+
+    h3 {
+      .icon {
+        top: 2px;
+      }
+    }
+
+    a {
+      padding: 10px 20px;
+    }
+  }
+
+  .trip-form {
+    .input-container {
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      width: 100%;
+    }
+
+    fieldset {
+      padding: 10px 20px 20px 20px;
+      background-color: rgba($color: $secondary, $alpha: 0.6);
+    }
+
+    input,
+    select,
+    textarea {
+      width: 90%;
+      padding: 5px 10px;
+    }
+
+    textarea {
+      width: 80%;
+    }
+
+    .user-qs {
+      width: 100%;
+      margin: 0 40px;
+
+      .icon {
+        align-self: center;
+      }
+    }
+
+    .trip-qs {
+      margin-bottom: 20px;
+    }
+
+    .partnered {
+      flex-direction: column;
+    }
+  }
+
+  .all-trips {
+    form {
+      background-color: rgba($color: $secondary, $alpha: 0.6);
+      margin: 25px 25px;
+      padding: 15px 25px;
+      gap: 10px;
+    }
+
+    .trip-container {
+      background-color: rgba($color: $secondary, $alpha: 0.6);
+    }
+  }
+}

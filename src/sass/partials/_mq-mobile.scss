@@ -1,0 +1,96 @@
+@use "./variables" as *;
+
+@media (max-width: 480px) {
+  h2,
+  legend {
+    font-size: 2rem;
+    margin: 5px;
+  }
+
+  h3,
+  label {
+    font-size: 0.9rem;
+  }
+
+  h4 {
+    font-size: 1rem;
+    margin: 10px;
+  }
+
+  header {
+    position: fixed;
+    justify-content: flex-end;
+    width: 100%;
+
+    h1 {
+      position: absolute;
+      top: 15px;
+      left: -150px;
+      color: transparent;
+      .icon {
+        color: $primary;
+        font-size: 1.4rem;
+      }
+    }
+
+    nav {
+      width: 75%;
+    }
+  }
+
+  footer {
+    p {
+      font-size: 0.75rem;
+    }
+  }
+
+  .home {
+    .text-container {
+      margin-top: 75px;
+      padding: 20px;
+    }
+
+    ul {
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+
+    a {
+      padding: 5px 10px;
+    }
+  }
+
+  .trip-form {
+    padding-top: 75px;
+
+    textarea {
+      width: 100%;
+    }
+
+    .input-container {
+      flex-direction: column;
+    }
+  }
+
+  .all-trips {
+    form {
+      margin: 100px 25px 25px 25px;
+    }
+
+    .trips {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    .trip-container {
+      width: 95%;
+    }
+  }
+
+  .error {
+    .text-container {
+      padding: 90px 25px 15px 25px;
+    }
+  }
+}

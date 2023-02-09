@@ -1,0 +1,145 @@
+@use "./variables" as *;
+
+.trip-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  legend {
+    text-shadow: $secondary 0 0 10px;
+    padding: 20px;
+  }
+
+  label {
+    text-align: right;
+  }
+
+  .input-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+  }
+
+  fieldset {
+    background-color: rgba($color: $secondary, $alpha: 0.5);
+    padding: 20px 40px 40px 40px;
+    border-radius: 20px;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  input,
+  select,
+  textarea {
+    background-color: $primary;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: $sans;
+
+    &::placeholder {
+      font-family: $sans;
+      color: gray;
+    }
+  }
+
+  textarea {
+    width: 70%;
+  }
+
+  option {
+    font-family: $sans;
+  }
+
+  .user-qs {
+    width: 65%;
+    margin: 0 40px;
+
+    .icon {
+      color: $primary;
+      cursor: pointer;
+      font-size: 1.5rem;
+      align-self: flex-start;
+      border-radius: 50%;
+      transition: all 0.5s ease-in-out;
+
+      &:hover,
+      &:focus {
+        box-shadow: 0 0 10px 5px $primary;
+      }
+    }
+  }
+
+  .trip-qs {
+    align-items: center;
+    margin-bottom: 40px;
+
+    label {
+      text-align: center;
+    }
+
+    .input-container {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .safetyRating {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      p {
+        color: $primary;
+        font-size: 1.5rem;
+        font-family: $sans;
+        margin: 10px 0;
+      }
+      input {
+        padding-top: 0;
+      }
+    }
+
+    .zero,
+    .one,
+    .two,
+    .three,
+    .four,
+    .five {
+      padding: 5px 15px;
+    }
+
+    .faves,
+    .advice {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .log-trip {
+    border: 1px solid $primary;
+    background: transparent;
+    font-family: $sans;
+    padding: 20px 40px;
+    border-radius: 10px;
+    transition: all 0.5s ease-in-out;
+
+    &:hover,
+    &:focus {
+      text-shadow: $primary 0 0 10px;
+      box-shadow: 0 0 10px 5px $primary;
+    }
+  }
+
+  button {
+    margin-top: 15px;
+  }
+
+  button .icon {
+    margin-right: 5px;
+    position: relative;
+    top: 3px;
+  }
+}
