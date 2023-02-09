@@ -147,6 +147,7 @@ const TripForm = ({
           />
           <BiInfoCircle
             className="icon"
+            aria-label="Information about form"
             onClick={(e) => {
               e.preventDefault();
               Swal.fire(formInfo);
