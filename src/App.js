@@ -74,27 +74,31 @@ function App() {
 
   // Handler to submit trip information to firebase database
   const handleSubmit = () => {
-    const database = getDatabase(firebase);
-    const postListRef = ref(database, "posts");
-    const newPostRef = push(postListRef);
-    set(newPostRef, allValues);
-    setAllValues({
-      name: allValues.name,
-      pronouns: allValues.pronouns,
-      age: allValues.age,
-      gender: allValues.gender,
-      sexuality: allValues.sexuality,
-      ethnicity: allValues.ethnicity,
-      city: "",
-      country: "",
-      arrivalDate: "",
-      returnDate: "",
-      partnered: "",
-      safetyRating: 0,
-      faves: "",
-      advice: "",
-    });
-    setIsChecked(false);
+    try {
+      const database = getDatabase(firebase);
+      const postListRef = ref(database, "posts");
+      const newPostRef = push(postListRef);
+      set(newPostRef, allValues);
+      setAllValues({
+        name: allValues.name,
+        pronouns: allValues.pronouns,
+        age: allValues.age,
+        gender: allValues.gender,
+        sexuality: allValues.sexuality,
+        ethnicity: allValues.ethnicity,
+        city: "",
+        country: "",
+        arrivalDate: "",
+        returnDate: "",
+        partnered: "",
+        safetyRating: 0,
+        faves: "",
+        advice: "",
+      });
+      setIsChecked(false);
+    } catch (error) {
+      alert(error);
+    }
   };
 
   // Store changes in value when the user searches for a trip
@@ -105,16 +109,20 @@ function App() {
 
   // Collects trip data from firebase database on component mount and change in database
   useEffect(() => {
-    const database = getDatabase(firebase);
-    const postListRef = ref(database, "posts");
-    onValue(postListRef, (response) => {
-      const data = response.val();
-      const newState = [];
-      for (let key in data) {
-        newState.push({ key: key, tripInfo: data[key] });
-      }
-      setTrips(newState);
-    });
+    try {
+      const database = getDatabase(firebase);
+      const postListRef = ref(database, "posts");
+      onValue(postListRef, (response) => {
+        const data = response.val();
+        const newState = [];
+        for (let key in data) {
+          newState.push({ key: key, tripInfo: data[key] });
+        }
+        setTrips(newState);
+      });
+    } catch (error) {
+      alert(error);
+    }
   }, []);
 
   // Fetch country and city information from API on component mount
@@ -125,6 +133,9 @@ function App() {
       })
       .then((data) => {
         setCountryData(data.data);
+      })
+      .catch((error) => {
+        alert(error);
       });
   }, []);
 

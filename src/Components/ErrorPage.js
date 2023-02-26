@@ -4,7 +4,7 @@ import { BiPlanet } from "react-icons/bi";
 // Components
 import AnimatedPage from "./AnimatedPage";
 
-const ErrorPage = ({ homePage }) => {
+const ErrorPage = () => {
   return (
     <AnimatedPage>
       <section className="error wrapper">
