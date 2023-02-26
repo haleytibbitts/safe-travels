@@ -15,17 +15,25 @@ const TripForm = ({
   const validateForm = () => {
     if (
       allValues.name &&
+      allValues.name !== " " &&
       allValues.pronouns &&
+      allValues.pronouns !== " " &&
       allValues.age &&
+      allValues.age !== " " &&
       allValues.gender &&
+      allValues.gender !== " " &&
       allValues.sexuality &&
+      allValues.sexuality !== " " &&
       allValues.ethnicity &&
+      allValues.ethnicity !== " " &&
       allValues.country &&
       allValues.city &&
       allValues.arrivalDate &&
       allValues.returnDate &&
       allValues.faves &&
-      allValues.advice
+      allValues.faves !== " " &&
+      allValues.advice &&
+      allValues.name !== " "
     ) {
       handleSubmit();
       Swal.fire(tripLogged);

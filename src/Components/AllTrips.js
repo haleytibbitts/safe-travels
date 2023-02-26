@@ -2,13 +2,7 @@ import { useEffect, useState } from "react";
 import AnimatedPage from "./AnimatedPage";
 import Swal from "sweetalert2";
 
-const AllTrips = ({
-  trips,
-  setTrips,
-  countryData,
-  searchValue,
-  setSearchValue,
-}) => {
+const AllTrips = ({ trips, countryData, searchValue, setSearchValue }) => {
   // Stateful variable that holds trips filtered by user selection
   const [filteredTrips, setFilteredTrips] = useState([]);
 
